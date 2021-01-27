@@ -25,14 +25,16 @@ RUN echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     apt-get update -y && apt-get install google-cloud-sdk -y
 
+RUN useradd --home-dir /app -s /bin/bash -r -U -u 1000 -G root ubuntu && usermod -aG sudo ubuntu && usermod -aG docker ubuntu
 
-RUN mkdir /app && chown 1000:1000 /app
+RUN mkdir /app
 
 WORKDIR /app
 
-RUN useradd --home-dir /app -s /bin/bash -r -U -u 1000 -G root ubuntu && usermod -aG sudo ubuntu && usermod -aG docker ubuntu
-USER ubuntu
+ADD .docker /app/.docker
 
-ADD . /app
+RUN chown -R 1000 /app
+
+USER ubuntu
 
 ENTRYPOINT [ "gcloud" ]
