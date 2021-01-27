@@ -1,4 +1,4 @@
-REPO ?= github.com/suddani/gcloud
+REPO ?= suddani/gcloud
 TAG  ?= $(shell git rev-parse --short HEAD)
 TAG_NAME ?= $(shell git name-rev --name-only HEAD)
 USED_TAG := $(TAG)
