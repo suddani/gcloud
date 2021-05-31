@@ -37,4 +37,4 @@ RUN chown -R 1000 /app
 
 USER ubuntu
 
-ENTRYPOINT [ "gcloud" ]
+# ENTRYPOINT [ "gcloud" ]
